@@ -77,12 +77,7 @@ object FunSets {
    * Returns a set transformed by applying `f` to each element of `s`.
    */
   def map(s: Set, f: Int => Int): Set = {
-    def compute(a: Int): Set = {
-      if (a > bound) x => false
-      else if (s(a)) union(singletonSet(f(a)), compute(a+1))
-      else compute(a+1)
-    }
-    compute(-bound)
+    (x: Int) => exists(s, (y: Int) => f(y) == x)
   }
   /**
    * Displays the contents of a set

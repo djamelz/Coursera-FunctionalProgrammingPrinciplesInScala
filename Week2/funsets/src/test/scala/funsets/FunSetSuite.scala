@@ -186,5 +186,7 @@ class FunSetSuite extends FunSuite {
       val s = map(x=> x >= 3, x => (x * x))
       assert(!s(8))
       assert(s(9))
+      assert(!s(15))
+      assert(s(16))
   }
 }
