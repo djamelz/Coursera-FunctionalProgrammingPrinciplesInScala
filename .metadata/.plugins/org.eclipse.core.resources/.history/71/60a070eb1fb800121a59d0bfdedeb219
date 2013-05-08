@@ -1,0 +1,44 @@
+package forcomp
+
+
+
+object temp {
+  type Occurrences = List[(Char, Int)]
+  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+  def wordOccurrences(w: String): Occurrences =
+    w.toLowerCase().groupBy((element: Char) => element).map{case (c, s) => (c, s.length)}.toList.sortBy((x) => x._1)
+                                                  //> wordOccurrences: (w: String)forcomp.temp.Occurrences
+  
+  
+  ("abcd".groupBy((element: Char) => element).map{case (c, s) => (c, s.length)}).toList
+                                                  //> res0: List[(Char, Int)] = List((b,1), (d,1), (a,1), (c,1))
+  
+  List("a","b","c").mkString                      //> res1: String = abc
+  
+  val occur = List("eat", "ate","tub").map( x => ( wordOccurrences(x), x))
+                                                  //> occur  : List[(forcomp.temp.Occurrences, String)] = List((List((a,1), (e,1),
+                                                  //|  (t,1)),eat), (List((a,1), (e,1), (t,1)),ate), (List((b,1), (t,1), (u,1)),tu
+                                                  //| b))
+  
+  occur.groupBy{ case (x,y) => x }.map{case(x,y) => x -> y.map{case(a,b) => b}}.toList
+                                                  //> res2: List[(forcomp.temp.Occurrences, List[String])] = List((List((a,1), (e,
+                                                  //| 1), (t,1)),List(eat, ate)), (List((b,1), (t,1), (u,1)),List(tub)))
+  
+  
+    
+    val lard = List(('a', 3), ('d', 1), ('l', 1), ('r', 1))
+                                                  //> lard  : List[(Char, Int)] = List((a,3), (d,1), (l,1), (r,1))
+    val r = List(('a', 2),('r', 2))               //> r  : List[(Char, Int)] = List((a,2), (r,2))
+    
+    lard.map{
+      case(z) => if (z._1 == r.head._1) (z._1, z._2 - r.head._2) else z
+      }.filter(p => !(p._2 == 0))                 //> res3: List[(Char, Int)] = List((a,1), (d,1), (l,1), (r,1))
+      
+      
+    lard.map{
+      case(z) => if ((r.exists(rr => z._1 == rr._1)) == None) (z._1, z._2) else z
+      }.filter(p => !(p._2 == 0))                 //> res4: List[(Char, Int)] = List((a,3), (d,1), (l,1), (r,1))
+     
+   def subtract(x: Occurrences, y: Occurrences): Occurrences =
+     y.forall(yy => if 
+}

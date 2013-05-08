@@ -1,0 +1,34 @@
+package forcomp
+
+
+
+object temp {
+  type Occurrences = List[(Char, Int)]
+  println("Welcome to the Scala worksheet")
+  def wordOccurrences(w: String): Occurrences =
+    w.toLowerCase().groupBy((element: Char) => element).map{case (c, s) => (c, s.length)}.toList.sortBy((x) => x._1)
+  
+  
+  ("abcd".groupBy((element: Char) => element).map{case (c, s) => (c, s.length)}).toList
+  
+  List("a","b","c").mkString
+  
+  val occur = List("eat", "ate","tub").map( x => ( wordOccurrences(x), x))
+  
+  occur.groupBy{ case (x,y) => x }.map{case(x,y) => x -> y.map{case(a,b) => b}}.toList
+  
+  
+    
+    val lard = List(('a', 1), ('d', 1), ('l', 1), ('r', 1))
+    val r = List(('r', 1))
+    
+    lard.map{
+      case(z) => if (z._1 == 'a') (z._1, z._2 - 2) else z
+      }
+      
+    for{
+      xx <- lard
+      yy <-r
+      if( (xx._1 == yy._1 && xx._2 > yy._2) || xx._1 != yy._1)
+    } yield xx.map( xxx => if(xxx._1 != yy._1) xx else (xx._1, xx._2 - yy._2))
+}

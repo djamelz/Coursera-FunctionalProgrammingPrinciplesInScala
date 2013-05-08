@@ -1,0 +1,42 @@
+package forcomp
+
+
+
+object temp {
+  type Occurrences = List[(Char, Int)]
+  println("Welcome to the Scala worksheet")
+  def wordOccurrences(w: String): Occurrences =
+    w.toLowerCase().groupBy((element: Char) => element).map{case (c, s) => (c, s.length)}.toList.sortBy((x) => x._1)
+  
+  
+  ("abcd".groupBy((element: Char) => element).map{case (c, s) => (c, s.length)}).toList
+  
+  List("a","b","c").mkString
+  
+  val occur = List("eat", "ate","tub").map( x => ( wordOccurrences(x), x))
+  
+  occur.groupBy{ case (x,y) => x }.map{case(x,y) => x -> y.map{case(a,b) => b}}.toList
+  
+  
+    
+    val lard = List(('a', 3), ('d', 1), ('l', 1), ('r', 1))
+    val r = List(('a', 2),('r', 2))
+    
+    lard.map{
+      case(z) => if (z._1 == r.head._1) (z._1, z._2 - r.head._2) else z
+      }.filter(p => !(p._2 == 0))
+
+    
+    lard.map{
+      case(z) => if ((r.exists(rr => z._1 == rr._1)) == None) (z._1, z._2) else z
+      }.filter(p => !(p._2 == 0))
+     
+   def subtract(x: Occurrences, y: Occurrences): Occurrences = {
+    (y.toMap.foldLeft(x.toMap) ((xx, yy) => {
+      val newFreq = xx(yy._1) - yy._2
+      if (newFreq <= 0) xx - yy._1
+      else xx.updated(yy._1, newFreq)
+    })).toList.sorted
+  }
+  subtract(lard,r)
+}
